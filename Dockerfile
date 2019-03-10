@@ -23,4 +23,10 @@ WORKDIR /root/project
 COPY --from=0 /src/packages/server/cli-linux /usr/local/bin/code-server
 EXPOSE 8443
 # Unfortunately `.` does not work with code-server.
-CMD code-server $PWD
+#CMD code-server $PWD
+
+ADD image/code-server.sh /usr/local/bin/
+
+RUN chmod g=u /etc/passwd
+
+CMD [ "/usr/local/bin/code-server.sh" ]
